@@ -3,18 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Almvia</title>
+<title>Almvia — Clinical Intelligence Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
     --bg:        #0B0B0B;
-    --surface:   #121212;
+    --surface:   #101012;
+    --elevated:  #161618;
     --text:      #E4E0DB;
     --secondary: #9D9890;
     --muted:     #5C5955;
     --accent:    #C8956A;
+    --accent-soft: rgba(200,149,106,0.08);
     --border:    rgba(228,224,219,0.06);
   }
 
@@ -28,11 +30,12 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
+
   body::after {
     content: '';
     position: fixed; inset: 0;
     background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-    opacity: 0.022;
+    opacity: 0.018;
     pointer-events: none;
     z-index: 100;
   }
@@ -43,12 +46,13 @@
     padding: 24px 48px;
     display: flex; align-items: center; justify-content: space-between;
     z-index: 50;
-    mix-blend-mode: difference;
+    background: linear-gradient(to bottom, rgba(11,11,11,0.95) 0%, rgba(11,11,11,0.8) 60%, transparent 100%);
   }
   .logo {
     font-family: 'Instrument Serif', serif;
     font-size: 24px;
     color: var(--text);
+    text-decoration: none;
     opacity: 0; animation: fadeIn 0.8s 0.2s forwards;
   }
   .nav-cta {
@@ -72,6 +76,15 @@
     padding: 0 48px 80px;
     position: relative;
   }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 70%;
+    background: radial-gradient(ellipse 70% 50% at 20% 30%, rgba(200,149,106,0.04) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 60% at 80% 20%, rgba(200,149,106,0.02) 0%, transparent 60%);
+    pointer-events: none;
+  }
 
   .hero-eyebrow {
     font-size: 11px;
@@ -86,24 +99,29 @@
   .hero-title {
     font-family: 'Instrument Serif', serif;
     font-weight: 400;
-    font-size: clamp(48px, 7vw, 110px);
+    font-size: clamp(48px, 7vw, 100px);
     line-height: 0.95;
     letter-spacing: -0.03em;
     color: var(--text);
-    margin-bottom: 0;
     opacity: 0; animation: fadeIn 1s 0.6s forwards;
     max-width: 900px;
   }
-  .hero-title em {
+  .hero-title em { font-style: italic; color: var(--accent); }
+
+  .hero-subtitle {
+    font-family: 'Instrument Serif', serif;
     font-style: italic;
-    color: var(--accent);
+    font-size: clamp(18px, 2vw, 24px);
+    color: var(--secondary);
+    margin-top: 20px;
+    opacity: 0; animation: fadeIn 1s 0.75s forwards;
   }
 
   .hero-lower {
     display: flex;
     justify-content: space-between;
     align-items: end;
-    margin-top: 64px;
+    margin-top: 56px;
     padding-top: 40px;
     border-top: 1px solid var(--border);
     opacity: 0; animation: fadeIn 1s 0.9s forwards;
@@ -113,7 +131,7 @@
     font-size: 15px;
     line-height: 1.75;
     color: var(--secondary);
-    max-width: 440px;
+    max-width: 480px;
     font-weight: 300;
   }
 
@@ -135,7 +153,6 @@
     display: inline-block;
   }
   .btn-primary:hover { opacity: 0.85; }
-
   .btn-secondary {
     color: var(--secondary);
     font-size: 13px;
@@ -188,7 +205,7 @@
     font-family: 'Instrument Serif', serif;
   }
 
-  /* ── Section ── */
+  /* ── Shared ── */
   .section { padding: 140px 48px; max-width: 1200px; margin: 0 auto; }
 
   .section-label {
@@ -200,6 +217,10 @@
     margin-bottom: 56px;
   }
 
+  .section-border {
+    border-top: 1px solid var(--border);
+  }
+
   /* ── Problem ── */
   .problem-grid {
     display: grid;
@@ -207,7 +228,7 @@
     gap: 100px;
     align-items: start;
   }
-  .problem-title {
+  .section-title {
     font-family: 'Instrument Serif', serif;
     font-weight: 400;
     font-size: clamp(36px, 4vw, 56px);
@@ -215,27 +236,40 @@
     letter-spacing: -0.02em;
     color: var(--text);
   }
-  .problem-title em {
-    font-style: italic;
-    color: var(--accent);
-  }
+  .section-title em { font-style: italic; color: var(--accent); }
 
-  .problem-body p {
+  .body-text p {
     font-size: 15px;
     line-height: 1.8;
     color: var(--secondary);
     margin-bottom: 20px;
     font-weight: 300;
   }
-  .problem-body p:last-child { margin-bottom: 0; }
+  .body-text p:last-child { margin-bottom: 0; }
 
-  /* ── How ── */
+  /* ── How it works ── */
   .how-section {
     padding: 140px 48px;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: relative;
   }
-  .how-inner { max-width: 1200px; margin: 0 auto; }
+  .how-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, var(--bg), var(--surface));
+    pointer-events: none;
+  }
+  .how-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(to top, var(--bg), var(--surface));
+    pointer-events: none;
+  }
+  .how-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
   .how-header {
     display: flex;
@@ -245,15 +279,6 @@
     padding-bottom: 48px;
     border-bottom: 1px solid var(--border);
   }
-  .how-title {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
-    font-size: clamp(36px, 4vw, 56px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--text);
-  }
-  .how-title em { font-style: italic; color: var(--accent); }
   .how-subtitle {
     font-size: 14px;
     color: var(--muted);
@@ -266,12 +291,10 @@
   .steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
   }
   .step {
     padding: 0 32px 0 0;
     border-right: 1px solid var(--border);
-    position: relative;
   }
   .step:last-child { border-right: none; padding-right: 0; }
   .step:not(:first-child) { padding-left: 32px; }
@@ -284,9 +307,7 @@
   }
   .step-num::after {
     content: '';
-    display: block;
-    flex: 1;
-    height: 1px;
+    flex: 1; height: 1px;
     background: var(--border);
   }
   .step-title {
@@ -304,14 +325,84 @@
     font-weight: 300;
   }
 
-  /* ── Distinction ── */
-  .distinction {
+  /* ── Feature sections (Prior Auth / Denials) ── */
+  .feature-section {
     padding: 140px 48px;
     max-width: 1200px;
     margin: 0 auto;
   }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 100px;
+    align-items: start;
+  }
+
+  .feature-left {
+    position: sticky;
+    top: 120px;
+  }
+
+  .feature-list {
+    margin-top: 32px;
+    padding: 0;
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .feature-list li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--secondary);
+    font-weight: 300;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    padding-left: 20px;
+  }
+  .feature-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 24px;
+    width: 6px; height: 1px;
+    background: var(--accent);
+  }
+
+  .body-text-feature p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--secondary);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .body-text-feature p:last-child { margin-bottom: 0; }
+
+  /* ── Gradient divider ── */
+  .gradient-divider {
+    height: 1px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(to right, transparent, rgba(200,149,106,0.15), transparent);
+  }
+
+  /* ── Distinction / Regulatory ── */
+  .distinction {
+    padding: 140px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .distinction::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 48px; right: 48px;
+    bottom: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 50%, var(--accent-soft) 0%, transparent 70%);
+    pointer-events: none;
+  }
   .distinction-inner {
     max-width: 720px;
+    position: relative;
   }
   .distinction-quote {
     font-family: 'Instrument Serif', serif;
@@ -323,18 +414,34 @@
     letter-spacing: -0.01em;
   }
   .distinction-quote em { color: var(--accent); font-style: italic; }
-  .distinction-sub {
+  .distinction-anchors {
     font-size: 12px;
     letter-spacing: 0.08em;
     color: var(--muted);
     font-weight: 400;
+    margin-bottom: 32px;
+  }
+  .distinction-note {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--secondary);
+    font-weight: 300;
+    max-width: 640px;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
   }
 
   /* ── Pilot ── */
   .pilot-section {
     padding: 140px 48px;
-    border-top: 1px solid var(--border);
     position: relative;
+  }
+  .pilot-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,149,106,0.12), transparent);
   }
 
   .pilot-grid {
@@ -346,10 +453,7 @@
     align-items: start;
   }
 
-  .pilot-left {
-    position: sticky;
-    top: 120px;
-  }
+  .pilot-left { position: sticky; top: 120px; }
   .pilot-title {
     font-family: 'Instrument Serif', serif;
     font-weight: 400;
@@ -360,18 +464,57 @@
     margin-bottom: 20px;
   }
   .pilot-title em { color: var(--accent); font-style: italic; }
+
   .pilot-body {
     font-size: 15px;
     line-height: 1.75;
     color: var(--secondary);
     font-weight: 300;
-    max-width: 380px;
+    margin-bottom: 28px;
+  }
+  .pilot-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .pilot-list li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--secondary);
+    font-weight: 300;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    padding-left: 20px;
+    position: relative;
+  }
+  .pilot-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 22px;
+    width: 6px; height: 1px;
+    background: var(--accent);
+  }
+  .pilot-note {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 24px;
+    line-height: 1.65;
+    font-weight: 300;
   }
 
+  /* ── Form ── */
   .form-wrapper {
     background: var(--surface);
     border: 1px solid var(--border);
     padding: 48px;
+    position: relative;
+  }
+  .form-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 15%; right: 15%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,149,106,0.2), transparent);
   }
   .form-row { margin-bottom: 28px; }
   .form-row label {
@@ -453,11 +596,10 @@
     color: var(--muted);
   }
   .footer-note {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--muted);
     font-style: italic;
     font-family: 'Instrument Serif', serif;
-    font-size: 14px;
   }
   .footer-tagline {
     font-size: 12px;
@@ -470,7 +612,10 @@
     to   { opacity: 1; }
   }
 
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
@@ -484,7 +629,7 @@
     .step:nth-child(odd) { padding-right: 32px; border-right: 1px solid var(--border); }
     .step:nth-child(even) { padding-left: 32px; }
     .step:nth-child(n+3) { padding-top: 48px; border-top: 1px solid var(--border); }
-    .problem-grid { gap: 60px; }
+    .problem-grid, .feature-grid { gap: 60px; }
     .pilot-grid { gap: 48px; }
     .how-header { flex-direction: column; align-items: start; gap: 24px; }
     .how-subtitle { text-align: left; }
@@ -494,46 +639,37 @@
   @media (max-width: 768px) {
     nav { padding: 20px 24px; }
     .logo { font-size: 22px; }
-    .nav-cta { font-size: 11px; }
 
     .hero { padding: 0 24px 56px; }
     .hero-title { font-size: clamp(38px, 10vw, 56px); }
     .hero-title br { display: none; }
-
-    .hero-lower {
-      flex-direction: column;
-      align-items: start;
-      gap: 32px;
-    }
+    .hero-lower { flex-direction: column; align-items: start; gap: 32px; }
     .hero-actions { width: 100%; }
     .btn-primary { width: 100%; text-align: center; padding: 16px; }
 
-    .section, .distinction { padding: 80px 24px; }
+    .section, .feature-section, .distinction { padding: 80px 24px; }
     .how-section, .pilot-section { padding: 80px 24px; }
     .stats-section { padding: 0 24px; }
 
     .stats-row {
-      grid-template-columns: 1fr;
-      border: none;
+      grid-template-columns: 1fr; border: none;
       border-top: 1px solid var(--border);
     }
     .stat-block {
-      border-right: none;
-      border-bottom: 1px solid var(--border);
+      border-right: none; border-bottom: 1px solid var(--border);
       padding: 32px 0;
     }
     .stat-block:not(:first-child) { padding-left: 0; }
     .stat-number { font-size: 48px; }
 
-    .problem-grid { grid-template-columns: 1fr; gap: 32px; }
-    .problem-title { font-size: clamp(32px, 8vw, 42px); }
-    .problem-title br { display: none; }
+    .problem-grid, .feature-grid { grid-template-columns: 1fr; gap: 32px; }
+    .section-title { font-size: clamp(32px, 8vw, 42px); }
+    .section-title br { display: none; }
+    .feature-left { position: static; }
 
     .steps { grid-template-columns: 1fr; gap: 40px; }
     .step, .step:nth-child(odd), .step:nth-child(even) {
-      border-right: none;
-      border-top: none;
-      padding: 0;
+      border-right: none; border-top: none; padding: 0;
     }
     .step:not(:first-child) { padding-top: 40px; border-top: 1px solid var(--border); }
 
@@ -556,7 +692,7 @@
   @media (max-width: 380px) {
     .hero { padding: 0 18px 48px; }
     .hero-title { font-size: 34px; }
-    .section, .how-section, .pilot-section, .distinction { padding: 56px 18px; }
+    .section, .feature-section, .how-section, .pilot-section, .distinction { padding: 56px 18px; }
     .stats-section { padding: 0 18px; }
     .form-wrapper { padding: 24px 16px; }
     nav { padding: 18px; }
@@ -566,113 +702,175 @@
 <body>
 
 <nav>
-  <div class="logo">Almvia</div>
+  <a href="#" class="logo">Almvia</a>
   <a href="#pilot" class="nav-cta">Join the Pilot</a>
 </nav>
 
+<!-- ════ Hero ════ -->
 <section class="hero">
-  <p class="hero-eyebrow">Clinical Intelligence</p>
+  <p class="hero-eyebrow">Clinical Intelligence Platform</p>
   <h1 class="hero-title">
-    Prior auth and appeals,<br><em>finally automated.</em>
+    Your prior auth and appeals process, <em>finally automated.</em>
   </h1>
+  <p class="hero-subtitle">Not routed to a queue. Executed.</p>
   <div class="hero-lower">
     <p class="hero-body">
-      Almvia ingests denial codes, retrieves chart evidence via your EHR's FHIR API, cross-references payer medical policies, and drafts a fully cited appeal packet. All before your staff opens their inbox.
+      When a claim gets denied, your staff spends hours hunting through charts, faxes, and outside records to build the appeal. Almvia reads the denial reason, pulls the clinical evidence from your EHR, matches it against the payer's medical policy, and drafts a cited appeal packet — before anyone opens their inbox.
     </p>
     <div class="hero-actions">
-      <a href="#pilot" class="btn-primary">Join the Pilot</a>
-      <a href="#how" class="btn-secondary">How it works</a>
+      <a href="#pilot" class="btn-primary">Join the Pilot Program</a>
+      <a href="#how" class="btn-secondary">See how it works</a>
     </div>
   </div>
 </section>
 
+<!-- ════ Stats ════ -->
 <div class="stats-section">
   <div class="stats-row reveal">
     <div class="stat-block">
       <div class="stat-number">13</div>
-      <div class="stat-label">Staff hours per physician<br>per week on prior auth</div>
+      <div class="stat-label">Staff hours per physician per week<br>spent on prior authorization</div>
       <div class="stat-source">AMA Physician Survey, 2024</div>
     </div>
     <div class="stat-block">
       <div class="stat-number">12%</div>
-      <div class="stat-label">Initial claim denial rate<br>in 2024, rising year over year</div>
+      <div class="stat-label">Initial claim denial rate in 2024,<br>up 2.4 points year over year</div>
       <div class="stat-source">HFMA / Kodiak Solutions, 2024</div>
     </div>
     <div class="stat-block">
       <div class="stat-number">65%</div>
-      <div class="stat-label">Prior authorizations still<br>processed fully manually</div>
+      <div class="stat-label">Prior authorizations still<br>processed fully by hand</div>
       <div class="stat-source">CAQH Index, 2024</div>
     </div>
   </div>
 </div>
 
+<!-- ════ Problem ════ -->
 <section class="section">
   <p class="section-label reveal">The problem</p>
   <div class="problem-grid">
     <div>
-      <h2 class="problem-title reveal">
-        The industry assigns denied claims to <em>humans.</em> We assign them to <em>Almvia.</em>
+      <h2 class="section-title reveal">
+        The industry routes denied claims to <em>humans.</em> Almvia executes the <em>response.</em>
       </h2>
     </div>
-    <div class="problem-body reveal reveal-delay-2">
-      <p>When a physician orders a procedure, someone on your admin team has to get insurance approval first. They open the EHR, hunt through notes and outside records, interpret the payer's medical policy, and package it all up. For every single request. Then the insurer says no, and the whole cycle starts over for the appeal.</p>
-      <p>Current tools make that queue more organized. They don't do the work. Almvia does the work.</p>
-      <p>When a claim gets denied, Almvia reads the specific denial reason now required under CMS's 2024 prior authorization final rule, pulls the relevant chart evidence via your EHR's FHIR API, cross-references the payer's published medical policy, and generates a fully cited appeal narrative. Your staff reviews, approves, and submits. The clinical legwork is already done.</p>
+    <div class="body-text reveal reveal-delay-2">
+      <p>When a physician orders a procedure, someone on your team has to get insurance approval first. They open the EHR, sort through notes and outside records, figure out what the payer actually requires, and package it all up — for every single request. Thirteen hours a week, per physician, on average.</p>
+      <p>Then the insurer says no. The appeal requires the same hunt all over again. Most practices either write a generic response that rarely wins, or they write off the denied revenue entirely because chasing it takes too long.</p>
+      <p>Current tools make the queue more organized. They assign the denied claim to a staff member with a flag and a due date. The staff member still does all the clinical work.</p>
+      <p>Almvia does the clinical work. It reads the specific denial reason, retrieves the relevant evidence from your EHR through a direct FHIR API connection, cross-references the payer's published medical necessity criteria, and generates a fully cited appeal narrative. Your staff reviews, approves, and submits. The hunting is already done.</p>
     </div>
   </div>
 </section>
 
+<!-- ════ How it works ════ -->
 <section class="how-section" id="how">
   <div class="how-inner">
+    <p class="section-label reveal">How it works</p>
     <div class="how-header reveal">
-      <h2 class="how-title">Four steps.<br><em>Fully automated.</em></h2>
+      <h2 class="section-title">Four steps.<br><em>Fully automated.</em></h2>
       <p class="how-subtitle">From denial to appeal-ready packet, without your staff touching the chart.</p>
     </div>
     <div class="steps">
       <div class="step reveal">
         <div class="step-num">01</div>
         <div class="step-title">Denial detected</div>
-        <p class="step-body">Almvia reads the denial code and identifies the specific medical necessity criterion the payer applied. Under CMS-0057-F, payers now have to provide specific denial reasons instead of vague rejections. That specificity is the input.</p>
+        <p class="step-body">Almvia reads the incoming denial code and identifies the specific medical necessity criterion the payer applied. Under the CMS prior authorization final rule effective 2027, payers must now give specific denial reasons, not vague rejections. That specificity is the input Almvia acts on.</p>
       </div>
       <div class="step reveal reveal-delay-1">
         <div class="step-num">02</div>
         <div class="step-title">Chart retrieved</div>
-        <p class="step-body">Almvia queries your EHR via FHIR R4 for the patient's clinical record (diagnoses, medications, labs, prior encounters) and simultaneously ingests unstructured sources like faxed consults, scanned imaging reports, and outside records.</p>
+        <p class="step-body">Almvia connects to your EHR via FHIR R4 and pulls the patient's clinical record — diagnoses, medications, lab results, prior encounters, and treatment history. It simultaneously ingests unstructured sources: faxed specialist consult notes, scanned outside imaging reports, and prior correspondence that the EHR doesn't capture.</p>
       </div>
       <div class="step reveal reveal-delay-2">
         <div class="step-num">03</div>
         <div class="step-title">Policy matched</div>
-        <p class="step-body">The retrieved evidence gets cross-referenced against the payer's published medical necessity policy for that specific procedure. Almvia identifies what supports the case, what's missing, and cites every finding with source, date, and page.</p>
+        <p class="step-body">The retrieved evidence is cross-referenced against the payer's published medical necessity policy for the specific procedure. Almvia identifies what supports the case, flags what's missing, and cites every finding with source, date, and page number.</p>
       </div>
       <div class="step reveal reveal-delay-3">
         <div class="step-num">04</div>
         <div class="step-title">Appeal drafted</div>
-        <p class="step-body">A fully cited appeal narrative lands in your admin team's inbox, ready to review. They verify, tweak if needed, and approve. Nothing gets submitted without explicit sign-off. The clinical work is already done.</p>
+        <p class="step-body">A fully cited appeal narrative lands in your admin team's inbox, ready to review. They verify, edit if needed, and approve. Nothing is ever submitted without explicit sign-off. Every action is logged with the reviewer's name and timestamp.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ════ Prior Authorization ════ -->
+<section class="feature-section section-border">
+  <p class="section-label reveal">Prior authorization</p>
+  <div class="feature-grid">
+    <div class="feature-left">
+      <h2 class="section-title reveal">Built before the denial <em>arrives.</em></h2>
+      <p class="body-text reveal reveal-delay-1" style="margin-top:24px;">
+        <span style="color:var(--secondary);font-size:15px;line-height:1.8;font-weight:300;">Most denials are preventable at submission. Almvia monitors your EHR for new cases in real time. When a procedure is ordered that requires prior authorization, it detects it automatically, pulls the supporting clinical evidence, checks it against the payer's criteria, and flags anything missing before the packet goes out.</span>
+      </p>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <p style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;font-weight:500;">What Almvia builds for every prior auth request</p>
+      <ul class="feature-list">
+        <li>A one-page clinical summary tying the diagnosis to the procedure and the payer's medical necessity criteria.</li>
+        <li>An evidence list with citations — every supporting note, lab result, imaging report, and treatment history entry, each linked to its source and date.</li>
+        <li>A missing items checklist identifying what the payer will likely ask for that isn't yet in the record, before the packet is submitted.</li>
+        <li>A portal-ready bundle assembled and formatted for submission.</li>
+      </ul>
+      <p style="font-size:14px;color:var(--secondary);margin-top:28px;line-height:1.75;font-weight:300;">The goal is to get it right the first time. Every prior auth that avoids a denial is hours of rework your team doesn't have to do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Denials & Appeals ════ -->
+<section class="feature-section section-border">
+  <p class="section-label reveal">Denials and appeals</p>
+  <div class="feature-grid">
+    <div class="feature-left">
+      <h2 class="section-title reveal">When the denial arrives, the work is <em>already done.</em></h2>
+    </div>
+    <div class="body-text-feature reveal reveal-delay-2">
+      <p>A denial letter used to be the beginning of a long manual process. Almvia makes it the beginning of an automated one.</p>
+      <p>When a denial arrives — by fax, PDF, or remit file — Almvia catches it immediately. It reads the specific denial reason now required under federal rules, links it to the patient and claim, and identifies the exact clinical criterion the payer said wasn't met.</p>
+      <p>From there it retrieves the evidence in the chart that addresses that criterion directly. Not a general summary of the patient's history. The specific documentation that responds to the specific denial reason — with citations to source, date, page, and author.</p>
+      <p>It then drafts the appeal narrative. The letter addresses the payer's stated criterion point by point, cites the supporting clinical evidence, and structures the argument in the format the payer's appeal process requires.</p>
+      <p>Your staff receives a review-ready packet. They read it, edit anything they want to change, and approve it. Nothing leaves the system without their sign-off. The full audit log records who reviewed it, what version was approved, and when it was submitted.</p>
+      <p>Almvia tracks every appeal through final resolution. Every outcome is logged — approved, denied at first level, escalated, overturned on external review. That data improves every future submission.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Regulatory ════ -->
+<div class="gradient-divider"></div>
 <section class="distinction">
-  <p class="section-label reveal">Regulatory foundation</p>
+  <p class="section-label reveal">Built on what the regulations now require</p>
   <div class="distinction-inner">
     <p class="distinction-quote reveal">
       CMS now requires payers to give <em>specific denial reasons</em> and respond to prior auth requests via FHIR API. Almvia is the provider-side system built to act on both.
     </p>
-    <p class="distinction-sub reveal reveal-delay-1">CMS-0057-F &middot; 21st Century Cures Act &middot; FHIR R4 Native</p>
+    <p class="distinction-anchors reveal reveal-delay-1">CMS-0057-F &middot; 21st Century Cures Act &middot; FHIR R4 Native</p>
+    <p class="distinction-note reveal reveal-delay-2">
+      The CMS Interoperability and Prior Authorization Final Rule, finalized January 2024, requires affected payers to implement FHIR R4 APIs for prior authorization by January 2027 and to provide a specific reason for every denial. The 21st Century Cures Act prohibits EHR information blocking and requires clinical data access through certified FHIR APIs — the legal foundation for Almvia's EHR integration. CAQH estimates that full electronic adoption of prior authorization could save the industry $515 million annually.
+    </p>
   </div>
 </section>
+<div class="gradient-divider"></div>
 
+<!-- ════ Pilot ════ -->
 <section class="pilot-section" id="pilot">
   <div class="pilot-grid">
     <div class="pilot-left">
       <p class="section-label reveal">Pilot program</p>
       <h2 class="pilot-title reveal">
-        We're working with <em>ten clinics</em> to prove this.
+        We're ready.<br><em>Are you?</em>
       </h2>
       <p class="pilot-body reveal reveal-delay-1">
-        We're inviting a small group of specialist practices to join our 90-day pilot at no cost. You give us deep access to your workflow. We give you measurable ROI, or you walk away with no obligation.
+        We're inviting a small group of specialist practices to join our 90-day pilot at no cost. You give us access to your real prior auth and denial workflow. We give you measurable time savings and ROI data — or you walk away with no contract and no obligation.
       </p>
+      <ul class="pilot-list reveal reveal-delay-2">
+        <li>Almvia connected to your EHR via FHIR within the first two weeks.</li>
+        <li>Prior auth packets and appeal drafts generated automatically from your real cases.</li>
+        <li>A 90-day report showing time saved per case, denial rate change, and appeal recovery rate.</li>
+        <li>A direct line to the founding team throughout — this is a research partnership, not a product demo.</li>
+      </ul>
+      <p class="pilot-note reveal reveal-delay-3">We're starting with orthopedics, oncology, cardiology, and neurology practices where prior auth volume is highest. If that's you, we'd like to talk.</p>
     </div>
 
     <div class="form-wrapper reveal reveal-delay-2">
@@ -686,7 +884,7 @@
           <input type="text" placeholder="Westside Orthopedics">
         </div>
         <div class="form-row">
-          <label>Email</label>
+          <label>Email address</label>
           <input type="email" placeholder="you@practice.com">
         </div>
         <div class="form-row">
@@ -704,9 +902,9 @@
         </div>
       </div>
       <div class="form-row">
-        <label>Practice size</label>
+        <label>Number of physicians</label>
         <select>
-          <option value="" disabled selected>Number of physicians</option>
+          <option value="" disabled selected>Select range</option>
           <option>1 to 5</option>
           <option>6 to 15</option>
           <option>16 to 30</option>
@@ -715,26 +913,27 @@
         </select>
       </div>
       <div class="form-row">
-        <label>Biggest challenge (optional)</label>
-        <textarea placeholder="What's most painful about your current prior auth process?"></textarea>
+        <label>What's your biggest prior auth or denial challenge? (optional)</label>
+        <textarea placeholder="What's most painful about your current process?"></textarea>
       </div>
-      <p class="form-note">Accepting 10 practices. We'll follow up within 48 hours to schedule a 20-minute call. No sales pitch, just questions about your workflow.</p>
-      <button class="btn-submit" onclick="handleSubmit(this)">Apply for the Pilot</button>
+      <p class="form-note">We're accepting 10 practices. We'll follow up within 48 hours to schedule a 20-minute call. No pitch — just questions about your workflow.</p>
+      <button class="btn-submit" onclick="handleSubmit(this)">Apply for the Pilot Program</button>
     </div>
   </div>
 </section>
 
+<!-- ════ Footer ════ -->
 <footer>
   <div class="footer-logo">Almvia</div>
-  <div class="footer-note">From Almaz, diamond in Amharic</div>
-  <div class="footer-tagline">&copy; 2026</div>
+  <div class="footer-note">From Almaz — diamond in Amharic. Precision through complexity.</div>
+  <div class="footer-tagline">&copy; 2026 &middot; Confidential</div>
 </footer>
 
 <script>
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.06 });
   reveals.forEach(el => io.observe(el));
 
   document.querySelectorAll('a[href^="#"]').forEach(a => {
