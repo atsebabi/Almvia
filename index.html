@@ -11,7 +11,6 @@
   :root {
     --bg:        #0B0B0B;
     --surface:   #101012;
-    --elevated:  #161618;
     --text:      #E4E0DB;
     --secondary: #9D9890;
     --muted:     #5C5955;
@@ -30,7 +29,6 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
-
   body::after {
     content: '';
     position: fixed; inset: 0;
@@ -53,18 +51,14 @@
     font-size: 24px;
     color: var(--text);
     text-decoration: none;
-    opacity: 0; animation: fadeIn 0.8s 0.2s forwards;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
   }
   .nav-cta {
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: var(--secondary);
-    text-decoration: none;
-    opacity: 0; animation: fadeIn 0.8s 0.4s forwards;
+    font-size: 12px; font-weight: 400; letter-spacing: 0.06em;
+    color: var(--secondary); text-decoration: none;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
     transition: color 0.2s;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--muted);
+    padding: 8px 0; border-bottom: 1px solid var(--muted);
   }
   .nav-cta:hover { color: var(--text); border-color: var(--text); }
 
@@ -78,87 +72,53 @@
   }
   .hero::before {
     content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    position: absolute; inset: 0;
     background: radial-gradient(ellipse 80% 60% at 15% 25%, rgba(200,149,106,0.07) 0%, transparent 65%),
                 radial-gradient(ellipse 60% 50% at 85% 15%, rgba(200,149,106,0.04) 0%, transparent 55%),
                 radial-gradient(ellipse 50% 40% at 50% 80%, rgba(200,149,106,0.03) 0%, transparent 60%);
     pointer-events: none;
   }
-
   .hero-eyebrow {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted);
     margin-bottom: 24px;
-    opacity: 0; animation: fadeIn 0.8s 0.5s forwards;
+    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
   }
-
   .hero-title {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
+    font-family: 'Instrument Serif', serif; font-weight: 400;
     font-size: clamp(48px, 7vw, 100px);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    color: var(--text);
-    opacity: 0; animation: fadeIn 1s 0.6s forwards;
-    max-width: 900px;
+    line-height: 0.95; letter-spacing: -0.03em;
+    color: var(--text); max-width: 900px;
+    opacity: 0; animation: fadeUp 1s 0.6s forwards;
   }
   .hero-title em { font-style: italic; color: var(--accent); }
-
   .hero-subtitle {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-size: clamp(18px, 2vw, 24px);
-    color: var(--secondary);
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: clamp(18px, 2vw, 24px); color: var(--secondary);
     margin-top: 20px;
-    opacity: 0; animation: fadeIn 1s 0.75s forwards;
+    opacity: 0; animation: fadeUp 1s 0.75s forwards;
   }
-
   .hero-lower {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-top: 56px;
-    padding-top: 40px;
+    display: flex; justify-content: space-between; align-items: end;
+    margin-top: 56px; padding-top: 40px;
     border-top: 1px solid var(--border);
-    opacity: 0; animation: fadeIn 1s 0.9s forwards;
+    opacity: 0; animation: fadeUp 1s 0.9s forwards;
   }
-
   .hero-body {
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--secondary);
-    max-width: 480px;
-    font-weight: 300;
+    font-size: 15px; line-height: 1.75; color: var(--secondary);
+    max-width: 480px; font-weight: 300;
   }
-
-  .hero-actions {
-    display: flex; gap: 32px; align-items: center;
-    flex-shrink: 0;
-  }
+  .hero-actions { display: flex; gap: 32px; align-items: center; flex-shrink: 0; }
   .btn-primary {
-    background: var(--accent);
-    color: var(--bg);
-    border: none;
-    padding: 14px 32px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    transition: opacity 0.2s;
-    display: inline-block;
+    background: var(--accent); color: var(--bg); border: none;
+    padding: 14px 32px; font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+    text-decoration: none; transition: opacity 0.2s; display: inline-block;
   }
   .btn-primary:hover { opacity: 0.85; }
   .btn-secondary {
-    color: var(--secondary);
-    font-size: 13px;
-    font-weight: 400;
-    text-decoration: none;
-    transition: color 0.2s;
+    color: var(--secondary); font-size: 13px; font-weight: 400;
+    text-decoration: none; transition: color 0.2s;
     display: flex; align-items: center; gap: 6px;
   }
   .btn-secondary::after { content: '\2192'; font-size: 15px; transition: transform 0.2s; }
@@ -167,522 +127,283 @@
 
   /* ── Stats ── */
   .stats-section {
-    padding: 0 48px;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
+    padding: 0 48px; max-width: 1200px; margin: 0 auto; position: relative;
   }
   .stats-section::before {
     content: '';
-    position: absolute;
-    top: -80px; left: 10%; right: 10%; bottom: -80px;
-    background: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(200,149,106,0.04) 0%, transparent 70%);
+    position: absolute; top: -80px; left: 10%; right: 10%; bottom: -80px;
+    background: radial-gradient(ellipse at 50% 50%, rgba(200,149,106,0.04) 0%, transparent 70%);
     pointer-events: none;
   }
   .stats-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
   }
-  .stat-block {
-    padding: 56px 0;
-    border-right: 1px solid var(--border);
-  }
+  .stat-block { padding: 56px 0; border-right: 1px solid var(--border); }
   .stat-block:last-child { border-right: none; }
   .stat-block:not(:first-child) { padding-left: 40px; }
   .stat-number {
-    font-family: 'Instrument Serif', serif;
-    font-size: 64px;
-    color: var(--text);
-    line-height: 1;
-    margin-bottom: 16px;
+    font-family: 'Instrument Serif', serif; font-size: 64px;
+    color: var(--text); line-height: 1; margin-bottom: 16px;
     letter-spacing: -0.03em;
   }
-  .stat-label {
-    font-size: 13px;
-    color: var(--secondary);
-    line-height: 1.55;
-    font-weight: 300;
-    margin-bottom: 8px;
-  }
-  .stat-source {
-    font-size: 11px;
-    color: var(--muted);
-    font-style: italic;
-    font-family: 'Instrument Serif', serif;
-  }
+  .stat-label { font-size: 13px; color: var(--secondary); line-height: 1.55; font-weight: 300; margin-bottom: 8px; }
+  .stat-source { font-size: 11px; color: var(--muted); font-style: italic; font-family: 'Instrument Serif', serif; }
 
   /* ── Shared ── */
   .section { padding: 140px 48px; max-width: 1200px; margin: 0 auto; }
-
   .section-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 56px;
-  }
-
-  .section-border {
-    border-top: 1px solid var(--border);
-    position: relative;
-  }
-  .section-border::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 5%; right: 60%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(200,149,106,0.18), transparent);
-    z-index: 1;
-  }
-
-  /* ── Problem ── */
-  .problem-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 100px;
-    align-items: start;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 48px;
   }
   .section-title {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
-    font-size: clamp(36px, 4vw, 56px);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    color: var(--text);
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(36px, 4vw, 56px); line-height: 1.08;
+    letter-spacing: -0.02em; color: var(--text);
   }
   .section-title em { font-style: italic; color: var(--accent); }
-
   .body-text p {
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--secondary);
-    margin-bottom: 20px;
-    font-weight: 300;
+    font-size: 15px; line-height: 1.8; color: var(--secondary);
+    margin-bottom: 20px; font-weight: 300;
   }
   .body-text p:last-child { margin-bottom: 0; }
 
+  /* ── Problem ── */
+  .problem-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    gap: 100px; align-items: start;
+  }
+
   /* ── How it works ── */
   .how-section {
-    padding: 140px 48px;
-    background: var(--surface);
-    position: relative;
+    padding: 140px 48px; background: var(--surface); position: relative;
   }
   .how-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 240px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 240px;
     background: linear-gradient(to bottom, var(--bg), var(--surface));
     pointer-events: none;
   }
   .how-section::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 240px;
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 240px;
     background: linear-gradient(to top, var(--bg), var(--surface));
     pointer-events: none;
   }
   .how-glow {
-    position: absolute;
-    top: 20%; right: 5%;
+    position: absolute; top: 20%; right: 5%;
     width: 500px; height: 500px;
     background: radial-gradient(circle, rgba(200,149,106,0.05) 0%, transparent 65%);
     pointer-events: none;
   }
   .how-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-
   .how-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 80px;
-    padding-bottom: 48px;
+    display: flex; justify-content: space-between; align-items: end;
+    margin-bottom: 80px; padding-bottom: 48px;
     border-bottom: 1px solid var(--border);
   }
   .how-subtitle {
-    font-size: 14px;
-    color: var(--muted);
-    max-width: 280px;
-    text-align: right;
-    line-height: 1.6;
-    font-weight: 300;
+    font-size: 14px; color: var(--muted); max-width: 280px;
+    text-align: right; line-height: 1.6; font-weight: 300;
   }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .step {
-    padding: 0 32px 0 0;
-    border-right: 1px solid var(--border);
-  }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .step { padding: 0 32px 0 0; border-right: 1px solid var(--border); }
   .step:last-child { border-right: none; padding-right: 0; }
   .step:not(:first-child) { padding-left: 32px; }
   .step-num {
-    font-family: 'Instrument Serif', serif;
-    font-size: 14px;
-    color: var(--accent);
-    margin-bottom: 32px;
+    font-family: 'Instrument Serif', serif; font-size: 14px;
+    color: var(--accent); margin-bottom: 32px;
     display: flex; align-items: center; gap: 12px;
   }
-  .step-num::after {
-    content: '';
-    flex: 1; height: 1px;
-    background: var(--border);
-  }
+  .step-num::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .step-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--text);
-    margin-bottom: 16px;
-    line-height: 1.2;
+    font-family: 'Instrument Serif', serif; font-size: 24px;
+    font-weight: 400; color: var(--text); margin-bottom: 12px; line-height: 1.2;
   }
-  .step-body {
-    font-size: 13px;
-    line-height: 1.75;
-    color: var(--secondary);
-    font-weight: 300;
-  }
+  .step-body { font-size: 13px; line-height: 1.75; color: var(--secondary); font-weight: 300; }
 
-  /* ── Feature sections (Prior Auth / Denials) ── */
-  .feature-section {
-    padding: 140px 48px;
+  /* ── What Almvia builds ── */
+  .capabilities {
+    padding: 120px 48px;
     max-width: 1200px;
     margin: 0 auto;
+    border-top: 1px solid var(--border);
     position: relative;
   }
-  .feature-section .feature-glow {
-    position: absolute;
-    width: 600px; height: 400px;
-    background: radial-gradient(ellipse, rgba(200,149,106,0.04) 0%, transparent 70%);
-    pointer-events: none;
+  .capabilities::before {
+    content: '';
+    position: absolute; top: 0; left: 5%; right: 60%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,149,106,0.18), transparent);
   }
-  .feature-section:first-of-type .feature-glow { top: 10%; left: -5%; }
-  .feature-section:last-of-type .feature-glow { bottom: 10%; right: -5%; }
-
-  .feature-grid {
+  .cap-grid {
     display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    gap: 100px;
-    align-items: start;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    margin-top: 56px;
+  }
+  .cap-card {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+  }
+  .cap-card h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px; font-weight: 400; color: var(--text);
+    margin-bottom: 12px;
+  }
+  .cap-card p {
+    font-size: 14px; line-height: 1.7; color: var(--secondary); font-weight: 300;
   }
 
-  .feature-left {
-    position: sticky;
-    top: 120px;
-  }
-
-  .feature-list {
-    margin-top: 32px;
-    padding: 0;
-    list-style: none;
-    display: flex; flex-direction: column; gap: 0;
-  }
-  .feature-list li {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--secondary);
-    font-weight: 300;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    padding-left: 20px;
-  }
-  .feature-list li::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 24px;
-    width: 6px; height: 1px;
-    background: var(--accent);
-  }
-
-  .body-text-feature p {
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--secondary);
-    margin-bottom: 20px;
-    font-weight: 300;
-  }
-  .body-text-feature p:last-child { margin-bottom: 0; }
-
-  /* ── Gradient divider ── */
+  /* ── Regulatory ── */
   .gradient-divider {
-    height: 1px;
-    max-width: 1200px;
-    margin: 0 auto;
+    height: 1px; max-width: 1200px; margin: 0 auto;
     background: linear-gradient(to right, transparent, rgba(200,149,106,0.22), transparent);
-    position: relative;
   }
-  .gradient-divider::after {
-    content: '';
-    position: absolute;
-    top: -40px; left: 20%; right: 20%;
-    height: 80px;
-    background: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(200,149,106,0.03) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  /* ── Distinction / Regulatory ── */
   .distinction {
-    padding: 140px 48px;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
+    padding: 120px 48px; max-width: 1200px; margin: 0 auto; position: relative;
   }
   .distinction::before {
-    content: '';
-    position: absolute;
-    top: -10%; left: 0; right: 0;
-    bottom: -10%;
-    background: radial-gradient(ellipse 70% 50% at 30% 50%, rgba(200,149,106,0.06) 0%, transparent 65%),
-                radial-gradient(ellipse 40% 40% at 70% 60%, rgba(200,149,106,0.03) 0%, transparent 60%);
+    content: ''; position: absolute; inset: -10% 0;
+    background: radial-gradient(ellipse 70% 50% at 30% 50%, rgba(200,149,106,0.06) 0%, transparent 65%);
     pointer-events: none;
   }
-  .distinction-inner {
-    max-width: 720px;
-    position: relative;
-  }
+  .distinction-inner { max-width: 720px; position: relative; }
   .distinction-quote {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
-    font-size: clamp(28px, 3.5vw, 46px);
-    line-height: 1.25;
-    color: var(--text);
-    margin-bottom: 32px;
-    letter-spacing: -0.01em;
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 46px); line-height: 1.25;
+    color: var(--text); margin-bottom: 24px; letter-spacing: -0.01em;
   }
   .distinction-quote em { color: var(--accent); font-style: italic; }
   .distinction-anchors {
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    font-weight: 400;
-    margin-bottom: 32px;
+    font-size: 12px; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 24px;
   }
   .distinction-note {
-    font-size: 14px;
-    line-height: 1.75;
-    color: var(--secondary);
-    font-weight: 300;
-    max-width: 640px;
-    border-top: 1px solid var(--border);
-    padding-top: 24px;
+    font-size: 14px; line-height: 1.75; color: var(--secondary); font-weight: 300;
+    max-width: 640px; border-top: 1px solid var(--border); padding-top: 20px;
   }
 
   /* ── Pilot ── */
   .pilot-section {
-    padding: 140px 48px;
-    position: relative;
-    overflow: hidden;
+    padding: 140px 48px; position: relative; overflow: hidden;
   }
   .pilot-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
     background: linear-gradient(to right, transparent, rgba(200,149,106,0.18), transparent);
   }
   .pilot-section::after {
-    content: '';
-    position: absolute;
-    top: 5%; left: -10%;
+    content: ''; position: absolute; top: 5%; left: -10%;
     width: 700px; height: 700px;
     background: radial-gradient(circle, rgba(200,149,106,0.05) 0%, transparent 60%);
     pointer-events: none;
   }
-
   .pilot-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 80px;
-    align-items: start;
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.2fr;
+    gap: 80px; align-items: start;
   }
-
   .pilot-left { position: sticky; top: 120px; }
   .pilot-title {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
-    font-size: clamp(36px, 4vw, 56px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 20px;
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(36px, 4vw, 56px); line-height: 1.05;
+    letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px;
   }
   .pilot-title em { color: var(--accent); font-style: italic; }
-
   .pilot-body {
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--secondary);
-    font-weight: 300;
-    margin-bottom: 28px;
+    font-size: 15px; line-height: 1.75; color: var(--secondary);
+    font-weight: 300; margin-bottom: 28px;
   }
-  .pilot-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+  .pilot-list { list-style: none; padding: 0; margin: 0; }
   .pilot-list li {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--secondary);
-    font-weight: 300;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border);
-    padding-left: 20px;
-    position: relative;
+    font-size: 14px; line-height: 1.7; color: var(--secondary); font-weight: 300;
+    padding: 14px 0 14px 20px; border-bottom: 1px solid var(--border); position: relative;
   }
   .pilot-list li::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 22px;
-    width: 6px; height: 1px;
-    background: var(--accent);
+    content: ''; position: absolute; left: 0; top: 22px;
+    width: 6px; height: 1px; background: var(--accent);
   }
   .pilot-note {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 24px;
-    line-height: 1.65;
-    font-weight: 300;
+    font-size: 13px; color: var(--muted); margin-top: 24px; line-height: 1.65; font-weight: 300;
   }
 
   /* ── Form ── */
   .form-wrapper {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 48px;
-    position: relative;
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 48px; position: relative;
   }
   .form-wrapper::before {
-    content: '';
-    position: absolute;
-    top: -1px; left: 10%; right: 10%;
-    height: 1px;
+    content: ''; position: absolute; top: -1px; left: 10%; right: 10%; height: 1px;
     background: linear-gradient(to right, transparent, rgba(200,149,106,0.3), transparent);
   }
   .form-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 120px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 120px;
     background: linear-gradient(to bottom, rgba(200,149,106,0.03), transparent);
     pointer-events: none;
-    border-radius: inherit;
   }
   .form-row { margin-bottom: 28px; }
   .form-row label {
-    display: block;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
+    display: block; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px;
   }
   .form-row input, .form-row select, .form-row textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid var(--border);
-    color: var(--text);
-    padding: 12px 0;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 300;
-    outline: none;
-    transition: border-color 0.2s;
-    appearance: none;
-    border-radius: 0;
+    width: 100%; background: transparent; border: none;
+    border-bottom: 1px solid var(--border); color: var(--text);
+    padding: 12px 0; font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 300; outline: none;
+    transition: border-color 0.2s; appearance: none; border-radius: 0;
   }
   .form-row input::placeholder, .form-row textarea::placeholder { color: var(--muted); }
-  .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
-    border-color: var(--accent);
-  }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus { border-color: var(--accent); }
   .form-row select { cursor: pointer; }
   .form-row select option { background: var(--surface); color: var(--text); }
   .form-row textarea {
-    min-height: 80px;
-    resize: vertical;
-    border: 1px solid var(--border);
-    padding: 14px 16px;
-    margin-top: 4px;
+    min-height: 80px; resize: vertical;
+    border: 1px solid var(--border); padding: 14px 16px; margin-top: 4px;
   }
   .form-row textarea:focus { border-color: var(--accent); }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-
-  .form-note {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.65;
-    margin-bottom: 28px;
-    font-weight: 300;
-  }
-
+  .form-note { font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 28px; font-weight: 300; }
   .btn-submit {
-    width: 100%;
-    background: var(--accent);
-    color: var(--bg);
-    border: none;
-    padding: 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    cursor: pointer;
-    transition: opacity 0.2s;
+    width: 100%; background: var(--accent); color: var(--bg); border: none;
+    padding: 16px; font-family: 'DM Sans', sans-serif; font-size: 13px;
+    font-weight: 500; letter-spacing: 0.02em; cursor: pointer; transition: opacity 0.2s;
   }
   .btn-submit:hover { opacity: 0.85; }
 
   /* ── Footer ── */
   footer {
-    padding: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid var(--border);
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 48px; display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto;
   }
-  .footer-logo {
-    font-family: 'Instrument Serif', serif;
-    font-size: 18px;
-    color: var(--muted);
-  }
-  .footer-note {
-    font-size: 14px;
-    color: var(--muted);
-    font-style: italic;
-    font-family: 'Instrument Serif', serif;
-  }
-  .footer-tagline {
-    font-size: 12px;
-    color: var(--muted);
-  }
+  .footer-logo { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--muted); }
+  .footer-note { font-size: 14px; color: var(--muted); font-style: italic; font-family: 'Instrument Serif', serif; }
+  .footer-tagline { font-size: 12px; color: var(--muted); }
 
   /* ── Animations ── */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes lineGrow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
   }
 
   .reveal {
-    opacity: 0; transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-4 { transition-delay: 0.6s; }
 
-  /* ── Tablet ── */
+  .line-reveal {
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 1.2s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .line-reveal.visible { transform: scaleX(1); }
+
+  /* ── Responsive ── */
   @media (max-width: 1024px) {
     .steps { grid-template-columns: 1fr 1fr; gap: 48px 0; }
     .step { border-right: none; padding: 0; }
@@ -690,70 +411,47 @@
     .step:nth-child(odd) { padding-right: 32px; border-right: 1px solid var(--border); }
     .step:nth-child(even) { padding-left: 32px; }
     .step:nth-child(n+3) { padding-top: 48px; border-top: 1px solid var(--border); }
-    .problem-grid, .feature-grid { gap: 60px; }
+    .problem-grid { gap: 60px; }
+    .cap-grid { grid-template-columns: 1fr 1fr; }
     .pilot-grid { gap: 48px; }
     .how-header { flex-direction: column; align-items: start; gap: 24px; }
     .how-subtitle { text-align: left; }
   }
-
-  /* ── Mobile ── */
   @media (max-width: 768px) {
     nav { padding: 20px 24px; }
     .logo { font-size: 22px; }
-
     .hero { padding: 0 24px 56px; }
     .hero-title { font-size: clamp(38px, 10vw, 56px); }
-    .hero-title br { display: none; }
     .hero-lower { flex-direction: column; align-items: start; gap: 32px; }
     .hero-actions { width: 100%; }
     .btn-primary { width: 100%; text-align: center; padding: 16px; }
-
-    .section, .feature-section, .distinction { padding: 80px 24px; }
+    .section, .capabilities, .distinction { padding: 80px 24px; }
     .how-section, .pilot-section { padding: 80px 24px; }
     .stats-section { padding: 0 24px; }
-
-    .stats-row {
-      grid-template-columns: 1fr; border: none;
-      border-top: 1px solid var(--border);
-    }
-    .stat-block {
-      border-right: none; border-bottom: 1px solid var(--border);
-      padding: 32px 0;
-    }
+    .stats-row { grid-template-columns: 1fr; border: none; border-top: 1px solid var(--border); }
+    .stat-block { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 0; }
     .stat-block:not(:first-child) { padding-left: 0; }
     .stat-number { font-size: 48px; }
-
-    .problem-grid, .feature-grid { grid-template-columns: 1fr; gap: 32px; }
+    .problem-grid { grid-template-columns: 1fr; gap: 32px; }
     .section-title { font-size: clamp(32px, 8vw, 42px); }
     .section-title br { display: none; }
-    .feature-left { position: static; }
-
+    .cap-grid { grid-template-columns: 1fr; gap: 32px; }
     .steps { grid-template-columns: 1fr; gap: 40px; }
-    .step, .step:nth-child(odd), .step:nth-child(even) {
-      border-right: none; border-top: none; padding: 0;
-    }
+    .step, .step:nth-child(odd), .step:nth-child(even) { border-right: none; border-top: none; padding: 0; }
     .step:not(:first-child) { padding-top: 40px; border-top: 1px solid var(--border); }
-
     .distinction-quote { font-size: clamp(24px, 6vw, 34px); }
-
     .pilot-grid { grid-template-columns: 1fr; gap: 40px; }
     .pilot-left { position: static; }
     .pilot-title { font-size: clamp(32px, 8vw, 42px); }
-    .pilot-title br { display: none; }
     .form-wrapper { padding: 28px 20px; }
     .form-grid { grid-template-columns: 1fr; gap: 0; }
     .form-row input, .form-row select, .form-row textarea { font-size: 16px; }
-
-    footer {
-      flex-direction: column; gap: 12px;
-      text-align: center; padding: 36px 24px;
-    }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 36px 24px; }
   }
-
   @media (max-width: 380px) {
     .hero { padding: 0 18px 48px; }
     .hero-title { font-size: 34px; }
-    .section, .feature-section, .how-section, .pilot-section, .distinction { padding: 56px 18px; }
+    .section, .capabilities, .how-section, .pilot-section, .distinction { padding: 56px 18px; }
     .stats-section { padding: 0 18px; }
     .form-wrapper { padding: 24px 16px; }
     nav { padding: 18px; }
@@ -776,7 +474,7 @@
   <p class="hero-subtitle">Not routed to a queue. Executed.</p>
   <div class="hero-lower">
     <p class="hero-body">
-      When a claim gets denied, your staff spends hours hunting through charts and faxes to build the appeal. Almvia reads the denial reason, pulls the clinical evidence from your EHR, matches it to the payer's policy, and drafts a cited appeal packet — before anyone opens their inbox.
+      Almvia reads the denial reason, pulls clinical evidence from your EHR, matches it to the payer's policy, and drafts a cited appeal packet — before anyone opens their inbox.
     </p>
     <div class="hero-actions">
       <a href="#pilot" class="btn-primary">Join the Pilot Program</a>
@@ -789,19 +487,19 @@
 <div class="stats-section">
   <div class="stats-row reveal">
     <div class="stat-block">
-      <div class="stat-number">13</div>
-      <div class="stat-label">Staff hours per physician per week<br>spent on prior authorization</div>
-      <div class="stat-source">AMA Physician Survey, 2024</div>
+      <div class="stat-number" data-count="13">0</div>
+      <div class="stat-label">Staff hours per physician<br>per week on prior auth</div>
+      <div class="stat-source">AMA, 2024</div>
     </div>
     <div class="stat-block">
-      <div class="stat-number">12%</div>
-      <div class="stat-label">Initial claim denial rate in 2024,<br>up 2.4 points year over year</div>
-      <div class="stat-source">HFMA / Kodiak Solutions, 2024</div>
+      <div class="stat-number" data-count="12" data-suffix="%">0%</div>
+      <div class="stat-label">Claim denial rate in 2024,<br>up 2.4 points YoY</div>
+      <div class="stat-source">HFMA, 2024</div>
     </div>
     <div class="stat-block">
-      <div class="stat-number">65%</div>
-      <div class="stat-label">Prior authorizations still<br>processed fully by hand</div>
-      <div class="stat-source">CAQH Index, 2024</div>
+      <div class="stat-number" data-count="65" data-suffix="%">0%</div>
+      <div class="stat-label">Prior auths still<br>processed fully by hand</div>
+      <div class="stat-source">CAQH, 2024</div>
     </div>
   </div>
 </div>
@@ -810,15 +508,12 @@
 <section class="section">
   <p class="section-label reveal">The problem</p>
   <div class="problem-grid">
-    <div>
-      <h2 class="section-title reveal">
-        The industry routes denied claims to <em>humans.</em> Almvia executes the <em>response.</em>
-      </h2>
-    </div>
+    <h2 class="section-title reveal">
+      The industry routes denied claims to <em>humans.</em> Almvia executes the <em>response.</em>
+    </h2>
     <div class="body-text reveal reveal-delay-2">
-      <p>When a physician orders a procedure, someone on your team has to get insurance approval. They dig through notes, outside records, and payer policies — for every single request. Thirteen hours a week, per physician.</p>
-      <p>Then the insurer says no. Most practices write a generic response that rarely wins, or write off the revenue entirely because chasing it takes too long.</p>
-      <p>Current tools organize the queue. They don't do the work. Almvia does. It reads the denial reason, retrieves evidence from your EHR via FHIR, cross-references the payer's criteria, and generates a cited appeal narrative. Your staff reviews and submits. The hunting is done.</p>
+      <p>Your team spends 13 hours per physician per week on prior auth. When the insurer says no, most practices write a generic appeal or write off the revenue entirely.</p>
+      <p>Current tools organize the queue. Almvia does the actual work — reads the denial, retrieves evidence via FHIR, matches payer criteria, and generates the cited appeal. Your staff reviews and submits.</p>
     </div>
   </div>
 </section>
@@ -830,111 +525,86 @@
     <p class="section-label reveal">How it works</p>
     <div class="how-header reveal">
       <h2 class="section-title">Four steps.<br><em>Fully automated.</em></h2>
-      <p class="how-subtitle">From denial to appeal-ready packet, without your staff touching the chart.</p>
+      <p class="how-subtitle">Denial to appeal-ready packet. No chart hunting.</p>
     </div>
     <div class="steps">
       <div class="step reveal">
         <div class="step-num">01</div>
         <div class="step-title">Denial detected</div>
-        <p class="step-body">Almvia reads the denial code and identifies the exact medical necessity criterion the payer applied. Under the CMS final rule effective 2027, payers must give specific denial reasons. That specificity is the input.</p>
+        <p class="step-body">Reads the denial code and identifies the specific medical necessity criterion the payer applied.</p>
       </div>
       <div class="step reveal reveal-delay-1">
         <div class="step-num">02</div>
         <div class="step-title">Chart retrieved</div>
-        <p class="step-body">Almvia connects to your EHR via FHIR R4 and pulls the full clinical record — diagnoses, meds, labs, encounters. It simultaneously ingests unstructured sources: faxed consults, scanned imaging, and outside records the EHR doesn't capture.</p>
+        <p class="step-body">Pulls the full clinical record via FHIR R4 — plus faxed consults, scanned imaging, and outside records.</p>
       </div>
       <div class="step reveal reveal-delay-2">
         <div class="step-num">03</div>
         <div class="step-title">Policy matched</div>
-        <p class="step-body">Evidence is cross-referenced against the payer's medical necessity policy for that procedure. Almvia identifies what supports the case, flags gaps, and cites every finding with source, date, and page.</p>
+        <p class="step-body">Cross-references evidence against the payer's medical necessity policy. Cites every finding with source, date, and page.</p>
       </div>
       <div class="step reveal reveal-delay-3">
         <div class="step-num">04</div>
         <div class="step-title">Appeal drafted</div>
-        <p class="step-body">A cited appeal narrative lands in your team's inbox. They review, edit if needed, and approve. Nothing ships without sign-off. Every action is logged.</p>
+        <p class="step-body">A cited appeal narrative lands in your team's inbox. Review, approve, submit. Every action logged.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════ Prior Authorization ════ -->
-<section class="feature-section section-border">
-  <div class="feature-glow"></div>
-  <p class="section-label reveal">Prior authorization</p>
-  <div class="feature-grid">
-    <div class="feature-left">
-      <h2 class="section-title reveal">Built before the denial <em>arrives.</em></h2>
-      <p class="body-text reveal reveal-delay-1" style="margin-top:24px;">
-        <span style="color:var(--secondary);font-size:15px;line-height:1.8;font-weight:300;">Most denials are preventable at submission. Almvia monitors your EHR in real time, detects procedures that need prior auth, pulls the clinical evidence, checks it against payer criteria, and flags what's missing before the packet goes out.</span>
-      </p>
+<!-- ════ Capabilities ════ -->
+<section class="capabilities">
+  <p class="section-label reveal">What Almvia handles</p>
+  <h2 class="section-title reveal" style="max-width:600px;margin-bottom:0;">Prevention and <em>recovery,</em> end to end.</h2>
+  <div class="cap-grid">
+    <div class="cap-card reveal reveal-delay-1">
+      <h3>Prior authorization</h3>
+      <p>Monitors your EHR for new cases, builds the clinical summary, evidence list, and missing items checklist — before the packet goes out.</p>
     </div>
-    <div class="reveal reveal-delay-2">
-      <p style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;font-weight:500;">What Almvia builds for every prior auth request</p>
-      <ul class="feature-list">
-        <li>A clinical summary tying diagnosis to procedure and payer criteria.</li>
-        <li>A cited evidence list — notes, labs, imaging, and history, each linked to source and date.</li>
-        <li>A missing items checklist flagging what the payer will ask for before you submit.</li>
-        <li>A portal-ready bundle formatted for submission.</li>
-      </ul>
-      <p style="font-size:14px;color:var(--secondary);margin-top:28px;line-height:1.75;font-weight:300;">Get it right the first time. Every denial avoided is hours of rework your team doesn't touch.</p>
+    <div class="cap-card reveal reveal-delay-2">
+      <h3>Denial response</h3>
+      <p>Catches denials from any channel, retrieves the specific chart evidence that addresses the payer's criterion, and drafts the appeal point by point.</p>
     </div>
-  </div>
-</section>
-
-<!-- ════ Denials & Appeals ════ -->
-<section class="feature-section section-border">
-  <div class="feature-glow"></div>
-  <p class="section-label reveal">Denials and appeals</p>
-  <div class="feature-grid">
-    <div class="feature-left">
-      <h2 class="section-title reveal">When the denial arrives, the work is <em>already done.</em></h2>
-    </div>
-    <div class="body-text-feature reveal reveal-delay-2">
-      <p>A denial used to start a long manual process. Almvia makes it the start of an automated one.</p>
-      <p>When a denial arrives — fax, PDF, or remit file — Almvia catches it immediately, reads the specific denial reason required under federal rules, and identifies the exact criterion the payer says wasn't met.</p>
-      <p>It then retrieves the chart evidence that addresses that criterion directly. Not a general patient summary — the specific documentation that responds to the specific reason, cited to source, date, and page.</p>
-      <p>The appeal narrative addresses the payer's criterion point by point, structured in the format their process requires. Your staff reviews, edits, and approves. Nothing leaves without sign-off. Full audit log on every action.</p>
-      <p>Almvia tracks every appeal through resolution. Outcomes are logged — approved, escalated, overturned. That data improves every future submission.</p>
+    <div class="cap-card reveal reveal-delay-3">
+      <h3>Resolution tracking</h3>
+      <p>Tracks every appeal through final resolution. Outcomes are logged — approved, escalated, overturned — and feed back into future submissions.</p>
     </div>
   </div>
 </section>
 
 <!-- ════ Regulatory ════ -->
-<div class="gradient-divider"></div>
+<div class="gradient-divider line-reveal"></div>
 <section class="distinction">
-  <p class="section-label reveal">Built on what the regulations now require</p>
+  <p class="section-label reveal">Regulatory foundation</p>
   <div class="distinction-inner">
     <p class="distinction-quote reveal">
-      CMS now requires payers to give <em>specific denial reasons</em> and respond to prior auth requests via FHIR API. Almvia is the provider-side system built to act on both.
+      CMS now requires payers to give <em>specific denial reasons</em> and respond to prior auth via FHIR API. Almvia is built to act on both.
     </p>
     <p class="distinction-anchors reveal reveal-delay-1">CMS-0057-F &middot; 21st Century Cures Act &middot; FHIR R4 Native</p>
     <p class="distinction-note reveal reveal-delay-2">
-      The CMS final rule (January 2024) requires payers to implement FHIR R4 APIs for prior auth by 2027 and give a specific reason for every denial. The Cures Act prohibits EHR information blocking — the legal foundation for Almvia's integration. CAQH estimates full electronic prior auth adoption saves $515 million annually.
+      Payers must implement FHIR R4 APIs for prior auth by 2027 and give specific denial reasons. The Cures Act prohibits EHR information blocking. CAQH estimates full electronic adoption saves $515M annually.
     </p>
   </div>
 </section>
-<div class="gradient-divider"></div>
+<div class="gradient-divider line-reveal"></div>
 
 <!-- ════ Pilot ════ -->
 <section class="pilot-section" id="pilot">
   <div class="pilot-grid">
     <div class="pilot-left">
       <p class="section-label reveal">Pilot program</p>
-      <h2 class="pilot-title reveal">
-        We're ready.<br><em>Are you?</em>
-      </h2>
+      <h2 class="pilot-title reveal">We're ready.<br><em>Are you?</em></h2>
       <p class="pilot-body reveal reveal-delay-1">
-        90 days, no cost. You give us access to your real workflow. We give you measurable time savings and ROI data — or you walk away with no contract.
+        90 days, no cost. Real workflow access for measurable ROI — or walk away with no contract.
       </p>
       <ul class="pilot-list reveal reveal-delay-2">
-        <li>EHR connected via FHIR within two weeks.</li>
-        <li>Prior auth and appeal drafts generated from your real cases.</li>
-        <li>90-day report: time saved, denial rate change, appeal recovery.</li>
-        <li>Direct line to the founding team — research partnership, not a demo.</li>
+        <li>EHR connected via FHIR in two weeks.</li>
+        <li>Auto-generated prior auth and appeal drafts from real cases.</li>
+        <li>90-day report: time saved, denial rates, appeal recovery.</li>
+        <li>Direct line to the founding team throughout.</li>
       </ul>
-      <p class="pilot-note reveal reveal-delay-3">Starting with ortho, oncology, cardiology, and neurology — where prior auth volume is highest. If that's you, let's talk.</p>
+      <p class="pilot-note reveal reveal-delay-3">Ortho, oncology, cardiology, neurology — where volume is highest.</p>
     </div>
-
     <div class="form-wrapper reveal reveal-delay-2">
       <div class="form-grid">
         <div class="form-row">
@@ -975,16 +645,15 @@
         </select>
       </div>
       <div class="form-row">
-        <label>What's your biggest prior auth or denial challenge? (optional)</label>
+        <label>Biggest challenge (optional)</label>
         <textarea placeholder="What's most painful about your current process?"></textarea>
       </div>
-      <p class="form-note">We're accepting 10 practices. We'll follow up within 48 hours to schedule a 20-minute call. No pitch — just questions about your workflow.</p>
+      <p class="form-note">10 spots. We'll follow up within 48 hours. No pitch — just workflow questions.</p>
       <button class="btn-submit" onclick="handleSubmit(this)">Apply for the Pilot Program</button>
     </div>
   </div>
 </section>
 
-<!-- ════ Footer ════ -->
 <footer>
   <div class="footer-logo">Almvia</div>
   <div class="footer-note">From Almaz — diamond in Amharic. Precision through complexity.</div>
@@ -992,12 +661,13 @@
 </footer>
 
 <script>
-  const reveals = document.querySelectorAll('.reveal');
+  // Scroll reveal
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.06 });
-  reveals.forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal, .line-reveal').forEach(el => io.observe(el));
 
+  // Smooth anchor scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -1005,6 +675,28 @@
     });
   });
 
+  // Stat counter animation
+  const counterIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = +el.dataset.count;
+      const suffix = el.dataset.suffix || '';
+      const duration = 1200;
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(target * ease) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      counterIO.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => counterIO.observe(el));
+
+  // Form submit
   function handleSubmit(btn) {
     btn.textContent = "Received. We'll be in touch within 48 hours.";
     btn.style.background = 'var(--surface)';
