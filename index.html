@@ -30,6 +30,9 @@
     font-weight: 300;
     overflow-x: hidden;
     cursor: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   .cursor {
@@ -66,7 +69,7 @@
     padding: 28px 60px;
     display: flex; align-items: center; justify-content: space-between;
     z-index: 50;
-    background: linear-gradient(to bottom, rgba(8,12,24,0.9) 0%, transparent 100%);
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
   }
   .logo {
     font-family: 'Cormorant Garamond', serif;
@@ -91,6 +94,7 @@
     transition: all 0.3s ease;
     opacity: 0;
     animation: fadeUp 1s 0.4s forwards;
+    border-radius: 2px;
   }
   .nav-cta:hover {
     background: var(--gold);
@@ -211,6 +215,7 @@
     transition: all 0.3s ease;
     cursor: none;
     display: inline-block;
+    border-radius: 2px;
   }
   .btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
 
@@ -277,6 +282,8 @@
     background: var(--border);
     margin: 80px 0;
   }
+  .stats-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+
   .stat-block {
     background: var(--midnight);
     padding: 48px 40px;
@@ -426,6 +433,7 @@
     border: 1px solid var(--border);
     padding: 52px;
     text-align: left;
+    border-radius: 4px;
   }
   .form-row { margin-bottom: 28px; }
   .form-row label {
@@ -449,6 +457,7 @@
     outline: none;
     transition: border-color 0.3s ease;
     appearance: none;
+    border-radius: 2px;
   }
   .form-row input::placeholder, .form-row textarea::placeholder { color: rgba(138,133,120,0.5); }
   .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
@@ -480,6 +489,7 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
+    border-radius: 2px;
   }
   .btn-submit:hover { background: var(--cream); transform: translateY(-2px); }
 
@@ -524,16 +534,76 @@
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
 
-  @media (max-width: 768px) {
-    nav { padding: 24px 28px; }
-    .section, .pilot-section, .how-section, .distinction { padding: 80px 28px; }
-    .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+  /* Hide custom cursor on touch devices */
+  @media (hover: none), (pointer: coarse) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    .btn-primary, .btn-secondary, .btn-submit { cursor: auto; }
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
     .steps { grid-template-columns: 1fr 1fr; }
-    .stats-row { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .form-wrapper { padding: 32px 24px; }
-    footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 28px; }
+    .problem-grid { gap: 48px; }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-cta { font-size: 10px; padding: 8px 18px; }
+    .logo { font-size: 19px; }
+
+    .hero { padding: 100px 24px 60px; min-height: 100svh; }
+    .hero-title { font-size: clamp(36px, 9vw, 52px); }
+    .hero-title br { display: none; }
+    .hero-subtitle { font-size: clamp(18px, 4.5vw, 24px); margin-bottom: 36px; }
+    .hero-body { font-size: 14px; margin-bottom: 40px; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 0.25em; }
+    .hero-eyebrow::before, .hero-eyebrow::after { width: 24px; }
+    .hero-actions { flex-direction: column; gap: 20px; width: 100%; }
+    .btn-primary { width: 100%; text-align: center; padding: 16px 32px; }
     .hero::before, .hero::after { display: none; }
+
+    .section, .pilot-section, .how-section, .distinction { padding: 72px 24px; }
+
+    .stats-wrapper { padding: 0 24px; }
+    .stats-row { grid-template-columns: 1fr; margin: 56px 0; }
+    .stat-block { padding: 32px 24px; }
+    .stat-number { font-size: 44px; }
+    .stat-label { font-size: 10px; }
+
+    .problem-grid { grid-template-columns: 1fr; gap: 32px; }
+    .problem-title { font-size: clamp(28px, 7vw, 40px); }
+    .problem-title br { display: none; }
+    .problem-body p { font-size: 14px; }
+
+    .steps { grid-template-columns: 1fr; gap: 1px; }
+    .step { padding: 36px 24px; }
+    .step-num { font-size: 56px; margin-bottom: 16px; }
+    .step-title { font-size: 20px; }
+    .step-body { font-size: 13px; }
+
+    .distinction-quote { font-size: clamp(22px, 5.5vw, 32px); }
+    .distinction-sub { font-size: 11px; line-height: 1.6; }
+
+    .pilot-title { font-size: clamp(28px, 7vw, 40px); }
+    .pilot-title br { display: none; }
+    .pilot-body { font-size: 14px; margin-bottom: 36px; }
+    .form-wrapper { padding: 28px 20px; }
+    .form-grid { grid-template-columns: 1fr; gap: 0; }
+    .form-row input, .form-row select, .form-row textarea { font-size: 16px; padding: 14px 16px; }
+
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 24px; }
+    .footer-note { font-size: 12px; }
+  }
+
+  /* Small phones */
+  @media (max-width: 380px) {
+    .hero { padding: 90px 18px 48px; }
+    .hero-title { font-size: 32px; }
+    .section, .pilot-section, .how-section, .distinction { padding: 56px 18px; }
+    .form-wrapper { padding: 24px 16px; }
+    nav { padding: 18px 18px; }
   }
 </style>
 </head>
@@ -564,7 +634,7 @@
 
 <div class="divider"></div>
 
-<div style="max-width:1200px; margin:0 auto; padding:0 60px;">
+<div class="stats-wrapper">
   <div class="stats-row reveal">
     <div class="stat-block">
       <div class="stat-number">13</div>
@@ -708,7 +778,7 @@
 
 <footer>
   <div class="footer-logo">A<span>l</span>mvia</div>
-  <div class="footer-note">From Almaz — diamond in Amharic. Precision through complexity.</div>
+  <div class="footer-note">From Almaz, diamond in Amharic. Precision through complexity.</div>
   <div class="footer-tagline">© 2026 · Confidential</div>
 </footer>
 
