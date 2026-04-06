@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Almvia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --midnight: #0A0A0A;
+    --deep:     #111111;
+    --navy:     #1A1A1A;
+    --gold:     #B8A080;
+    --gold-dim: #7A6E5E;
+    --cream:    #EDEDEB;
+    --warm:     #C4C0B8;
+    --muted:    #787570;
+    --glass:    rgba(255,255,255,0.03);
+    --border:   rgba(184,160,128,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--midnight);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    position: fixed; top: 0; left: 0;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed; top: 0; left: 0;
+    width: 32px; height: 32px;
+    border: 1px solid rgba(184,160,128,0.3);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 28px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    z-index: 50;
+    background: linear-gradient(to bottom, rgba(8,12,24,0.9) 0%, transparent 100%);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    color: var(--cream);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+  .logo span { color: var(--gold); }
+  .nav-cta {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--border);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+  }
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--midnight);
+    border-color: var(--gold);
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border: 1px solid rgba(184,160,128,0.05);
+    border-radius: 50%;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 900px;
+    border: 1px solid rgba(184,160,128,0.03);
+    border-radius: 50%;
+    animation: pulse 8s ease-in-out infinite 1s;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%,-50%) scale(1.04); opacity: 0.6; }
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+    position: relative;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px; height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(52px, 7vw, 96px);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.8s forwards;
+    position: relative;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(20px, 2.8vw, 32px);
+    line-height: 1.4;
+    color: var(--warm);
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 1.2s 1s forwards;
+    max-width: 640px;
+    font-style: italic;
+  }
+
+  .hero-body {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+    font-weight: 300;
+    position: relative;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center;
+    opacity: 0;
+    animation: fadeUp 1s 1.4s forwards;
+    position: relative;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--midnight);
+    border: none;
+    padding: 16px 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
+
+  .btn-secondary {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+    cursor: none;
+    padding-bottom: 2px;
+  }
+  .btn-secondary:hover { color: var(--cream); border-color: var(--gold-dim); }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+  }
+
+  .section { padding: 120px 60px; max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 48px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; display: block; width: 24px; height: 1px; background: var(--gold-dim); }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .problem-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 4vw, 54px);
+    line-height: 1.15;
+    color: var(--cream);
+  }
+  .problem-title em { font-style: italic; color: var(--gold); }
+
+  .problem-body p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin: 80px 0;
+  }
+  .stat-block {
+    background: var(--midnight);
+    padding: 48px 40px;
+    text-align: center;
+  }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 56px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    line-height: 1.6;
+    text-transform: uppercase;
+  }
+  .stat-source {
+    font-size: 10px;
+    color: var(--gold-dim);
+    margin-top: 8px;
+    letter-spacing: 0.08em;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .how-section {
+    padding: 120px 60px;
+    background: var(--deep);
+  }
+  .how-inner { max-width: 1200px; margin: 0 auto; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+    background: rgba(184,160,128,0.06);
+  }
+  .step {
+    background: var(--deep);
+    padding: 48px 32px;
+    position: relative;
+    transition: background 0.4s ease;
+  }
+  .step:hover { background: var(--navy); }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: rgba(184,160,128,0.08);
+    line-height: 1;
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .step-body {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .step-accent {
+    position: absolute; top: 0; left: 0;
+    width: 2px; height: 0;
+    background: var(--gold);
+    transition: height 0.4s ease;
+  }
+  .step:hover .step-accent { height: 100%; }
+
+  .distinction {
+    padding: 120px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .distinction-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 48px);
+    line-height: 1.35;
+    color: var(--cream);
+    max-width: 800px;
+    margin: 0 auto 24px;
+  }
+  .distinction-quote em { color: var(--gold); font-style: italic; }
+  .distinction-sub {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .pilot-section {
+    padding: 120px 60px;
+    background: var(--deep);
+    position: relative;
+    overflow: hidden;
+  }
+  .pilot-section::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border: 1px solid rgba(184,160,128,0.05);
+    border-radius: 50%;
+  }
+
+  .pilot-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+  .pilot-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 4.5vw, 58px);
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+  .pilot-title em { color: var(--gold); font-style: italic; }
+  .pilot-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 56px;
+    font-weight: 300;
+  }
+
+  .form-wrapper {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    padding: 52px;
+    text-align: left;
+  }
+  .form-row { margin-bottom: 28px; }
+  .form-row label {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(184,160,128,0.10);
+    color: var(--cream);
+    padding: 14px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s ease;
+    appearance: none;
+  }
+  .form-row input::placeholder, .form-row textarea::placeholder { color: rgba(138,133,120,0.5); }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    border-color: rgba(184,160,128,0.35);
+  }
+  .form-row select { cursor: pointer; }
+  .form-row select option { background: var(--deep); }
+  .form-row textarea { min-height: 100px; resize: vertical; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  .form-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 28px;
+    letter-spacing: 0.04em;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--gold);
+    color: var(--midnight);
+    border: none;
+    padding: 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .btn-submit:hover { background: var(--cream); transform: translateY(-2px); }
+
+  footer {
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-note {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .footer-tagline {
+    font-size: 11px;
+    color: var(--gold-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.9s ease, transform 0.9s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 24px 28px; }
+    .section, .pilot-section, .how-section, .distinction { padding: 80px 28px; }
+    .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .stats-row { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-wrapper { padding: 32px 24px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 28px; }
+    .hero::before, .hero::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="logo">A<span>l</span>mvia</div>
+  <a href="#pilot" class="nav-cta">Join the Pilot</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Clinical Intelligence Platform</div>
+  <h1 class="hero-title">
+    The prior authorization and<br>appeals process, <em>finally automated.</em>
+  </h1>
+  <p class="hero-subtitle">Not routed to a queue. Executed.</p>
+  <p class="hero-body">
+    Almvia ingests denial codes, retrieves chart evidence via your EHR's FHIR API, cross-references payer medical policies, and drafts a fully cited appeal packet. All before your staff opens their inbox.
+  </p>
+  <div class="hero-actions">
+    <a href="#pilot" class="btn-primary">Join the Pilot Program</a>
+    <a href="#how" class="btn-secondary">See how it works</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div style="max-width:1200px; margin:0 auto; padding:0 60px;">
+  <div class="stats-row reveal">
+    <div class="stat-block">
+      <div class="stat-number">13</div>
+      <div class="stat-label">Staff hours per physician<br>per week on prior auth</div>
+      <div class="stat-source">AMA Physician Survey, 2024</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">12%</div>
+      <div class="stat-label">Initial claim denial rate<br>in 2024, rising year over year</div>
+      <div class="stat-source">HFMA / Kodiak Solutions, 2024</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">65%</div>
+      <div class="stat-label">Prior authorizations still<br>processed fully manually</div>
+      <div class="stat-source">CAQH Index, 2024</div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-label reveal">The problem</div>
+  <div class="problem-grid">
+    <div>
+      <h2 class="problem-title reveal">
+        The industry assigns<br>denied claims to <em>humans.</em><br>We assign them to <em>Almvia.</em>
+      </h2>
+    </div>
+    <div class="problem-body reveal reveal-delay-2">
+      <p>When a physician orders a procedure, someone on your admin team has to get insurance approval first. They open the EHR, hunt through notes and outside records, interpret the payer's medical policy, and package it all up. For every single request. Then the insurer says no, and the whole cycle starts over for the appeal.</p>
+      <p>Current tools make that queue more organized. They don't do the work. Almvia does the work.</p>
+      <p>When a claim gets denied, Almvia reads the specific denial reason now required under CMS's 2024 prior authorization final rule, pulls the relevant chart evidence via your EHR's FHIR API, cross-references the payer's published medical policy, and generates a fully cited appeal narrative. Your staff reviews, approves, and submits. The clinical legwork is already done.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <div class="section-label reveal">How it works</div>
+    <h2 class="problem-title reveal" style="max-width:480px; margin-bottom:0;">
+      Four steps.<br><em>Fully automated.</em>
+    </h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-accent"></div>
+        <div class="step-num">01</div>
+        <div class="step-title">Denial detected</div>
+        <p class="step-body">Almvia reads the denial code and identifies the specific medical necessity criterion the payer applied. Under CMS-0057-F, payers now have to provide specific denial reasons instead of vague rejections. That specificity is the input.</p>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-accent"></div>
+        <div class="step-num">02</div>
+        <div class="step-title">Chart retrieved</div>
+        <p class="step-body">Almvia queries your EHR via FHIR R4 for the patient's clinical record (diagnoses, medications, labs, prior encounters) and simultaneously ingests unstructured sources like faxed consults, scanned imaging reports, and outside records.</p>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-accent"></div>
+        <div class="step-num">03</div>
+        <div class="step-title">Policy matched</div>
+        <p class="step-body">The retrieved evidence gets cross-referenced against the payer's published medical necessity policy for that specific procedure. Almvia identifies what supports the case, what's missing, and cites every finding with source, date, and page.</p>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-accent"></div>
+        <div class="step-num">04</div>
+        <div class="step-title">Appeal drafted</div>
+        <p class="step-body">A fully cited appeal narrative lands in your admin team's inbox, ready to review. They verify, tweak if needed, and approve. Nothing gets submitted without explicit sign-off. The clinical work is already done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="distinction">
+  <div class="section-label reveal" style="justify-content:center;">Built on what the regulations now require</div>
+  <p class="distinction-quote reveal">
+    CMS now requires payers to give <em>specific denial reasons</em> and respond to prior auth requests via FHIR API. Almvia is the provider-side system built to act on both.
+  </p>
+  <p class="distinction-sub reveal reveal-delay-1">CMS-0057-F · 21st Century Cures Act · FHIR R4 Native</p>
+</section>
+
+<div class="divider"></div>
+
+<section class="pilot-section" id="pilot">
+  <div class="pilot-inner">
+    <div class="section-label reveal" style="justify-content:center; margin-bottom:32px;">Pilot program</div>
+    <h2 class="pilot-title reveal">
+      We're working with<br><em>ten clinics</em> to prove this.
+    </h2>
+    <p class="pilot-body reveal reveal-delay-1">
+      We're inviting a small group of specialist practices to join our 90-day pilot at no cost. You give us deep access to your workflow. We give you measurable ROI, or you walk away with no obligation.
+    </p>
+
+    <div class="form-wrapper reveal reveal-delay-2">
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Your name</label>
+          <input type="text" placeholder="Dr. Sarah Chen">
+        </div>
+        <div class="form-row">
+          <label>Practice name</label>
+          <input type="text" placeholder="Westside Orthopedics">
+        </div>
+        <div class="form-row">
+          <label>Email address</label>
+          <input type="email" placeholder="you@practice.com">
+        </div>
+        <div class="form-row">
+          <label>Specialty</label>
+          <select>
+            <option value="" disabled selected>Select your specialty</option>
+            <option>Orthopedics</option>
+            <option>Oncology</option>
+            <option>Cardiology</option>
+            <option>Neurology</option>
+            <option>Gastroenterology</option>
+            <option>Rheumatology</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>How many physicians in your practice?</label>
+        <select>
+          <option value="" disabled selected>Select range</option>
+          <option>1 to 5</option>
+          <option>6 to 15</option>
+          <option>16 to 30</option>
+          <option>31 to 50</option>
+          <option>50 or more</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>What's your biggest prior auth or denial challenge? (optional)</label>
+        <textarea placeholder="Tell us what's most painful about your current process..."></textarea>
+      </div>
+      <p class="form-note">We're accepting 10 practices for the pilot. We'll follow up within 48 hours to schedule a 20-minute call. No sales pitch, just questions about your workflow.</p>
+      <button class="btn-submit" onclick="handleSubmit(this)">Apply for the Pilot Program</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">A<span>l</span>mvia</div>
+  <div class="footer-note">From Almaz — diamond in Amharic. Precision through complexity.</div>
+  <div class="footer-tagline">© 2026 · Confidential</div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+  });
+
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  function handleSubmit(btn) {
+    btn.textContent = "Application received. We'll be in touch within 48 hours.";
+    btn.style.background = '#1A1A1A';
+    btn.style.color = '#A0BFA0';
+    btn.style.letterSpacing = '0.08em';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
