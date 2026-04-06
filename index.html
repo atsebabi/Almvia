@@ -79,10 +79,10 @@
   .hero::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 70%;
-    background: radial-gradient(ellipse 70% 50% at 20% 30%, rgba(200,149,106,0.04) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 60% at 80% 20%, rgba(200,149,106,0.02) 0%, transparent 60%);
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 80% 60% at 15% 25%, rgba(200,149,106,0.07) 0%, transparent 65%),
+                radial-gradient(ellipse 60% 50% at 85% 15%, rgba(200,149,106,0.04) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 40% at 50% 80%, rgba(200,149,106,0.03) 0%, transparent 60%);
     pointer-events: none;
   }
 
@@ -170,6 +170,14 @@
     padding: 0 48px;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+  }
+  .stats-section::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 10%; right: 10%; bottom: -80px;
+    background: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(200,149,106,0.04) 0%, transparent 70%);
+    pointer-events: none;
   }
   .stats-row {
     display: grid;
@@ -219,6 +227,15 @@
 
   .section-border {
     border-top: 1px solid var(--border);
+    position: relative;
+  }
+  .section-border::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 5%; right: 60%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,149,106,0.18), transparent);
+    z-index: 1;
   }
 
   /* ── Problem ── */
@@ -257,7 +274,7 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 200px;
+    height: 240px;
     background: linear-gradient(to bottom, var(--bg), var(--surface));
     pointer-events: none;
   }
@@ -265,8 +282,15 @@
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 200px;
+    height: 240px;
     background: linear-gradient(to top, var(--bg), var(--surface));
+    pointer-events: none;
+  }
+  .how-glow {
+    position: absolute;
+    top: 20%; right: 5%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(200,149,106,0.05) 0%, transparent 65%);
     pointer-events: none;
   }
   .how-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
@@ -330,7 +354,16 @@
     padding: 140px 48px;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
   }
+  .feature-section .feature-glow {
+    position: absolute;
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(200,149,106,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .feature-section:first-of-type .feature-glow { top: 10%; left: -5%; }
+  .feature-section:last-of-type .feature-glow { bottom: 10%; right: -5%; }
 
   .feature-grid {
     display: grid;
@@ -382,7 +415,16 @@
     height: 1px;
     max-width: 1200px;
     margin: 0 auto;
-    background: linear-gradient(to right, transparent, rgba(200,149,106,0.15), transparent);
+    background: linear-gradient(to right, transparent, rgba(200,149,106,0.22), transparent);
+    position: relative;
+  }
+  .gradient-divider::after {
+    content: '';
+    position: absolute;
+    top: -40px; left: 20%; right: 20%;
+    height: 80px;
+    background: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(200,149,106,0.03) 0%, transparent 70%);
+    pointer-events: none;
   }
 
   /* ── Distinction / Regulatory ── */
@@ -395,9 +437,10 @@
   .distinction::before {
     content: '';
     position: absolute;
-    top: 0; left: 48px; right: 48px;
-    bottom: 0;
-    background: radial-gradient(ellipse 60% 40% at 50% 50%, var(--accent-soft) 0%, transparent 70%);
+    top: -10%; left: 0; right: 0;
+    bottom: -10%;
+    background: radial-gradient(ellipse 70% 50% at 30% 50%, rgba(200,149,106,0.06) 0%, transparent 65%),
+                radial-gradient(ellipse 40% 40% at 70% 60%, rgba(200,149,106,0.03) 0%, transparent 60%);
     pointer-events: none;
   }
   .distinction-inner {
@@ -435,13 +478,22 @@
   .pilot-section {
     padding: 140px 48px;
     position: relative;
+    overflow: hidden;
   }
   .pilot-section::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(200,149,106,0.12), transparent);
+    background: linear-gradient(to right, transparent, rgba(200,149,106,0.18), transparent);
+  }
+  .pilot-section::after {
+    content: '';
+    position: absolute;
+    top: 5%; left: -10%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(200,149,106,0.05) 0%, transparent 60%);
+    pointer-events: none;
   }
 
   .pilot-grid {
@@ -512,9 +564,18 @@
   .form-wrapper::before {
     content: '';
     position: absolute;
-    top: -1px; left: 15%; right: 15%;
+    top: -1px; left: 10%; right: 10%;
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(200,149,106,0.2), transparent);
+    background: linear-gradient(to right, transparent, rgba(200,149,106,0.3), transparent);
+  }
+  .form-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, rgba(200,149,106,0.03), transparent);
+    pointer-events: none;
+    border-radius: inherit;
   }
   .form-row { margin-bottom: 28px; }
   .form-row label {
@@ -765,6 +826,7 @@
 
 <!-- ════ How it works ════ -->
 <section class="how-section" id="how">
+  <div class="how-glow"></div>
   <div class="how-inner">
     <p class="section-label reveal">How it works</p>
     <div class="how-header reveal">
@@ -798,6 +860,7 @@
 
 <!-- ════ Prior Authorization ════ -->
 <section class="feature-section section-border">
+  <div class="feature-glow"></div>
   <p class="section-label reveal">Prior authorization</p>
   <div class="feature-grid">
     <div class="feature-left">
@@ -821,6 +884,7 @@
 
 <!-- ════ Denials & Appeals ════ -->
 <section class="feature-section section-border">
+  <div class="feature-glow"></div>
   <p class="section-label reveal">Denials and appeals</p>
   <div class="feature-grid">
     <div class="feature-left">
