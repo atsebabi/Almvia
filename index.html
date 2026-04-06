@@ -356,6 +356,44 @@
     font-size: 14px; line-height: 1.7; color: var(--secondary); font-weight: 300;
   }
 
+  /* ── Feature sections ── */
+  .feature-section {
+    padding: 140px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+    position: relative;
+  }
+  .feature-section::before {
+    content: '';
+    position: absolute; top: 0; left: 5%; right: 60%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,149,106,0.18), transparent);
+  }
+  .feature-grid {
+    display: grid; grid-template-columns: 1fr 1.3fr;
+    gap: 100px; align-items: start;
+  }
+  .feature-left { position: sticky; top: 120px; }
+  .feature-list {
+    margin-top: 28px; padding: 0; list-style: none;
+  }
+  .feature-list li {
+    font-size: 14px; line-height: 1.7; color: var(--secondary); font-weight: 300;
+    padding: 16px 0 16px 20px; border-bottom: 1px solid var(--border); position: relative;
+  }
+  .feature-list li::before {
+    content: ''; position: absolute; left: 0; top: 24px;
+    width: 6px; height: 1px; background: var(--accent);
+  }
+  .feature-closing {
+    font-size: 14px; color: var(--secondary); margin-top: 24px; line-height: 1.75; font-weight: 300;
+  }
+  .feature-body p {
+    font-size: 15px; line-height: 1.8; color: var(--secondary);
+    margin-bottom: 20px; font-weight: 300;
+  }
+  .feature-body p:last-child { margin-bottom: 0; }
+
   /* ── Regulatory ── */
   .gradient-divider {
     height: 1px; max-width: 1200px; margin: 0 auto;
@@ -516,6 +554,7 @@
     .step:nth-child(even) { padding-left: 32px; }
     .step:nth-child(n+3) { padding-top: 48px; border-top: 1px solid var(--border); }
     .problem-grid { gap: 60px; }
+    .feature-grid { gap: 60px; }
     .cap-grid { grid-template-columns: 1fr 1fr; }
     .pilot-grid { gap: 48px; }
     .how-header { flex-direction: column; align-items: start; gap: 24px; }
@@ -535,14 +574,15 @@
     .btn-primary { width: 100%; text-align: center; }
     .btn-secondary { width: 100%; justify-content: center; }
     .hero-scroll { display: none; }
-    .section, .capabilities, .distinction { padding: 80px 24px; }
+    .section, .capabilities, .feature-section, .distinction { padding: 80px 24px; }
     .how-section, .pilot-section { padding: 80px 24px; }
     .stats-section { padding: 0 24px; }
     .stats-row { grid-template-columns: 1fr; border: none; border-top: 1px solid var(--border); }
     .stat-block { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 0; }
     .stat-block:not(:first-child) { padding-left: 0; }
     .stat-number { font-size: 48px; }
-    .problem-grid { grid-template-columns: 1fr; gap: 32px; }
+    .problem-grid, .feature-grid { grid-template-columns: 1fr; gap: 32px; }
+    .feature-left { position: static; }
     .section-title { font-size: clamp(32px, 8vw, 42px); }
     .section-title br { display: none; }
     .cap-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -561,7 +601,7 @@
   @media (max-width: 380px) {
     .hero { padding: 90px 18px 60px; }
     .hero-title { font-size: 34px; }
-    .section, .capabilities, .how-section, .pilot-section, .distinction { padding: 56px 18px; }
+    .section, .capabilities, .feature-section, .how-section, .pilot-section, .distinction { padding: 56px 18px; }
     .stats-section { padding: 0 18px; }
     .form-wrapper { padding: 24px 16px; }
     nav { padding: 18px; }
@@ -687,6 +727,47 @@
     <div class="cap-card reveal reveal-delay-3">
       <h3>Resolution tracking</h3>
       <p>Tracks every appeal through final resolution. Outcomes are logged — approved, escalated, overturned — and feed back into future submissions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Prior Authorization ════ -->
+<section class="feature-section">
+  <p class="section-label reveal">Prior authorization</p>
+  <div class="feature-grid">
+    <div class="feature-left">
+      <h2 class="section-title reveal">Built before the denial <em>arrives.</em></h2>
+      <p class="feature-closing reveal reveal-delay-1" style="margin-top:24px;">
+        Most denials are preventable at submission. Almvia monitors your EHR for new cases in real time. When a procedure is ordered that requires prior authorization, it detects it automatically, pulls the supporting clinical evidence, checks it against the payer's criteria, and flags anything missing before the packet goes out.
+      </p>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <p style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;font-weight:500;">What Almvia builds for every prior auth request</p>
+      <ul class="feature-list">
+        <li>A one-page clinical summary tying the diagnosis to the procedure and the payer's medical necessity criteria.</li>
+        <li>An evidence list with citations — every supporting note, lab result, imaging report, and treatment history entry, each linked to its source and date.</li>
+        <li>A missing items checklist identifying what the payer will likely ask for that isn't yet in the record, before the packet is submitted.</li>
+        <li>A portal-ready bundle assembled and formatted for submission.</li>
+      </ul>
+      <p class="feature-closing">The goal is to get it right the first time. Every prior auth that avoids a denial is hours of rework your team doesn't have to do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Denials & Appeals ════ -->
+<section class="feature-section">
+  <p class="section-label reveal">Denials and appeals</p>
+  <div class="feature-grid">
+    <div class="feature-left">
+      <h2 class="section-title reveal">When the denial arrives, the work is <em>already done.</em></h2>
+    </div>
+    <div class="feature-body reveal reveal-delay-2">
+      <p>A denial letter used to be the beginning of a long manual process. Almvia makes it the beginning of an automated one.</p>
+      <p>When a denial arrives — by fax, PDF, or remit file — Almvia catches it immediately. It reads the specific denial reason now required under federal rules, links it to the patient and claim, and identifies the exact clinical criterion the payer said wasn't met.</p>
+      <p>From there it retrieves the evidence in the chart that addresses that criterion directly. Not a general summary of the patient's history. The specific documentation that responds to the specific denial reason — with citations to source, date, page, and author.</p>
+      <p>It then drafts the appeal narrative. The letter addresses the payer's stated criterion point by point, cites the supporting clinical evidence, and structures the argument in the format the payer's appeal process requires.</p>
+      <p>Your staff receives a review-ready packet. They read it, edit anything they want to change, and approve it. Nothing leaves the system without their sign-off. The full audit log records who reviewed it, what version was approved, and when it was submitted.</p>
+      <p>Almvia tracks every appeal through final resolution. Every outcome is logged — approved, denied at first level, escalated, overturned on external review. That data improves every future submission.</p>
     </div>
   </div>
 </section>
