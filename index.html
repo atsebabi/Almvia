@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Almvia — Clinical Intelligence Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -47,8 +47,8 @@
     background: linear-gradient(to bottom, rgba(11,11,11,0.95) 0%, rgba(11,11,11,0.8) 60%, transparent 100%);
   }
   .logo {
-    font-family: 'Instrument Serif', serif;
-    font-size: 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px; font-weight: 600; letter-spacing: -0.02em;
     color: var(--text);
     text-decoration: none;
     opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
@@ -157,13 +157,13 @@
   }
 
   .hero-title {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
-    font-size: clamp(48px, 7.5vw, 108px);
-    line-height: 0.92; letter-spacing: -0.035em;
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+    font-size: clamp(44px, 6.5vw, 86px);
+    line-height: 1.05; letter-spacing: -0.03em;
     color: var(--text); max-width: 950px; position: relative;
     opacity: 0; animation: heroTitleIn 1.2s 0.6s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
   }
-  .hero-title em { font-style: italic; color: var(--accent); }
+  .hero-title em { font-style: normal; color: var(--accent); }
 
   @keyframes heroTitleIn {
     from { opacity: 0; transform: translateY(40px) scale(0.97); }
@@ -171,8 +171,8 @@
   }
 
   .hero-subtitle {
-    font-family: 'Instrument Serif', serif; font-style: italic;
-    font-size: clamp(18px, 2.2vw, 26px); color: var(--secondary);
+    font-family: 'DM Sans', sans-serif; font-style: normal;
+    font-size: clamp(16px, 1.8vw, 22px); color: var(--secondary); font-weight: 400;
     margin-top: 24px; position: relative;
     opacity: 0; animation: fadeUp 1s 0.9s forwards;
   }
@@ -247,12 +247,12 @@
   .stat-block:last-child { border-right: none; }
   .stat-block:not(:first-child) { padding-left: 40px; }
   .stat-number {
-    font-family: 'Instrument Serif', serif; font-size: 64px;
+    font-family: 'DM Sans', sans-serif; font-size: 56px; font-weight: 600;
     color: var(--text); line-height: 1; margin-bottom: 16px;
     letter-spacing: -0.03em;
   }
   .stat-label { font-size: 13px; color: var(--secondary); line-height: 1.55; font-weight: 300; margin-bottom: 8px; }
-  .stat-source { font-size: 11px; color: var(--muted); font-style: italic; font-family: 'Instrument Serif', serif; }
+  .stat-source { font-size: 11px; color: var(--muted); font-style: italic; font-family: 'DM Sans', sans-serif; }
 
   /* ── Shared ── */
   .section { padding: 140px 48px; max-width: 1200px; margin: 0 auto; }
@@ -261,11 +261,11 @@
     text-transform: uppercase; color: var(--accent); margin-bottom: 48px;
   }
   .section-title {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
-    font-size: clamp(36px, 4vw, 56px); line-height: 1.08;
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 3.5vw, 50px); line-height: 1.12;
     letter-spacing: -0.02em; color: var(--text);
   }
-  .section-title em { font-style: italic; color: var(--accent); }
+  .section-title em { font-style: normal; color: var(--accent); }
   .body-text p {
     font-size: 15px; line-height: 1.8; color: var(--secondary);
     margin-bottom: 20px; font-weight: 300;
@@ -313,14 +313,14 @@
   .step:last-child { border-right: none; padding-right: 0; }
   .step:not(:first-child) { padding-left: 32px; }
   .step-num {
-    font-family: 'Instrument Serif', serif; font-size: 14px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
     color: var(--accent); margin-bottom: 32px;
     display: flex; align-items: center; gap: 12px;
   }
   .step-num::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .step-title {
-    font-family: 'Instrument Serif', serif; font-size: 24px;
-    font-weight: 400; color: var(--text); margin-bottom: 12px; line-height: 1.2;
+    font-family: 'DM Sans', sans-serif; font-size: 20px;
+    font-weight: 500; color: var(--text); margin-bottom: 12px; line-height: 1.25;
   }
   .step-body { font-size: 13px; line-height: 1.75; color: var(--secondary); font-weight: 300; }
 
@@ -348,8 +348,8 @@
     padding-top: 28px;
   }
   .cap-card h3 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 22px; font-weight: 400; color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px; font-weight: 500; color: var(--text);
     margin-bottom: 12px;
   }
   .cap-card p {
@@ -371,11 +371,11 @@
   }
   .distinction-inner { max-width: 720px; position: relative; }
   .distinction-quote {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
-    font-size: clamp(28px, 3.5vw, 46px); line-height: 1.25;
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+    font-size: clamp(24px, 3vw, 38px); line-height: 1.3;
     color: var(--text); margin-bottom: 24px; letter-spacing: -0.01em;
   }
-  .distinction-quote em { color: var(--accent); font-style: italic; }
+  .distinction-quote em { color: var(--accent); font-style: normal; }
   .distinction-anchors {
     font-size: 12px; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 24px;
   }
@@ -405,11 +405,11 @@
   }
   .pilot-left { position: sticky; top: 120px; }
   .pilot-title {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
-    font-size: clamp(36px, 4vw, 56px); line-height: 1.05;
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 3.5vw, 50px); line-height: 1.12;
     letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px;
   }
-  .pilot-title em { color: var(--accent); font-style: italic; }
+  .pilot-title em { color: var(--accent); font-style: normal; }
   .pilot-body {
     font-size: 15px; line-height: 1.75; color: var(--secondary);
     font-weight: 300; margin-bottom: 28px;
@@ -477,8 +477,8 @@
     padding: 48px; display: flex; align-items: center; justify-content: space-between;
     border-top: 1px solid var(--border); max-width: 1200px; margin: 0 auto;
   }
-  .footer-logo { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--muted); }
-  .footer-note { font-size: 14px; color: var(--muted); font-style: italic; font-family: 'Instrument Serif', serif; }
+  .footer-logo { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: var(--muted); letter-spacing: -0.02em; }
+  .footer-note { font-size: 13px; color: var(--muted); font-weight: 300; }
   .footer-tagline { font-size: 12px; color: var(--muted); }
 
   /* ── Animations ── */
